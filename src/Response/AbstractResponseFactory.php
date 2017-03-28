@@ -10,5 +10,10 @@ namespace Plugin\ApiClient\Response;
  */
 abstract class AbstractResponseFactory
 {
+    /**
+     * @param $data
+     *
+     * @return array
+     */
     abstract function parseData($data);
 }
