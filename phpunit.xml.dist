@@ -1,0 +1,14 @@
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="api">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <const name="API_LOGIN" value="login"/>
+        <const name="API_PASSWORD" value="pass"/>
+        <const name="API_TOKEN" value="token"/>
+        <const name="API_TENANT_DOMAIN" value="google"/>
+        <const name="API_URI" value="http://docker.dooglys.local:8222/api/"/>
+    </php>
+</phpunit>
