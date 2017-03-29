@@ -75,32 +75,72 @@ class Client
      */
     public function cacheClear(array $options)
     {
-        return $this->callMethod('v1/cache/clear', 'POST', $options);
+        return $this->callMethod('cache/clear', 'POST', $options);
     }
 
     /**
      * API method /v1/curve/save
      *
-     * @param array $options
-     *
-     * @return mixed
-     */
-    public function curveSave(array $options)
-    {
-        return $this->callMethod('v1/curve/save', 'POST', $options);
-    }
-
-    /**
-     * API method /v1/texture/save
-     *
+     * @param       $pathToFile
      * @param array $options
      *
      * @return mixed
      * @throws BadResponseException
      */
-    public function textureSave(array $options)
+    public function curveUpload($pathToFile, array $options)
     {
-        return $this->callMethod('v1/texture/save', 'POST', $options);
+        if (file_exists($pathToFile)) {
+            $options = $this->optionsToMultipartData($options);
+            $options = array_merge($options, [
+                [
+                    'name' => 'dataFile',
+                    'contents' => fopen($pathToFile, 'r')
+                ]
+            ]);
+
+            return $this->callMethod('curve/upload', 'POST', $options);
+        }
+
+        throw new BadResponseException('File not found ' . $pathToFile);
+    }
+
+    /**
+     * API method /v1/texture/save
+     *
+     * @param       $pathToFile
+     * @param array $options
+     *
+     * @return mixed
+     * @throws BadResponseException
+     */
+    public function productTextureUpload($pathToFile, array $options)
+    {
+        if (file_exists($pathToFile)) {
+            $options = $this->optionsToMultipartData($options);
+            $options = array_merge($options, [
+                [
+                    'name' => 'dataFile',
+                    'contents' => fopen($pathToFile, 'r')
+                ]
+            ]);
+
+            return $this->callMethod('product-texture/upload', 'POST', $options);
+        }
+
+        throw new BadResponseException('File not found ' . $pathToFile);
+    }
+
+    private function optionsToMultipartData($options)
+    {
+        $result = [];
+        foreach ($options as $key => $value) {
+            $result[] = [
+                'name' => $key,
+                'contents' => $value
+            ];
+        }
+
+        return $result;
     }
 
 
@@ -127,21 +167,22 @@ class Client
      */
     public function avatarCreate(array $options)
     {
-        return $this->callMethod('v1/avatar/create', 'POST', $options);
+        return $this->callMethod('avatar/create', 'POST', $options);
     }
 
 
     /**
      * API method /v1/avatar/update
      *
+     * @param       $avatarId
      * @param array $options
      *
      * @return mixed
      * @throws BadResponseException
      */
-    public function avatarUpdate(array $options)
+    public function avatarUpdate($avatarId, array $options)
     {
-        return $this->callMethod('v1/avatar/update', 'POST', $options);
+        return $this->callMethod('avatar/update/' . $avatarId, 'POST', $options);
     }
 
 
@@ -174,7 +215,7 @@ class Client
         try {
             $requestKeyOptions = [
                 'GET' => 'query',
-                'POST' => 'json',
+                'POST' => 'multipart',
                 'PUT' => 'json',
             ];
             $response = $this->httpClient->request($method, $uri,

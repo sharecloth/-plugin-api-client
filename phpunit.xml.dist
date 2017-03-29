@@ -5,10 +5,7 @@
         </testsuite>
     </testsuites>
     <php>
-        <const name="API_LOGIN" value="login"/>
-        <const name="API_PASSWORD" value="pass"/>
         <const name="API_TOKEN" value="token"/>
-        <const name="API_TENANT_DOMAIN" value="google"/>
-        <const name="API_URI" value="http://docker.dooglys.local:8222/api/"/>
+        <const name="API_URI" value="http://plugin-admin-local.local:20000/api/v1/"/>
     </php>
 </phpunit>
