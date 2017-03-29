@@ -98,7 +98,7 @@ class Client
                 ]
             ]);
 
-            return $this->callMethod('curve/upload', 'POST', $options);
+            return $this->callMethod('curve/upload', 'POST', $options, 'multipart');
         }
 
         throw new BadResponseException('File not found ' . $pathToFile);
@@ -124,7 +124,7 @@ class Client
                 ]
             ]);
 
-            return $this->callMethod('product-texture/upload', 'POST', $options);
+            return $this->callMethod('product-texture/upload', 'POST', $options, 'multipart');
         }
 
         throw new BadResponseException('File not found ' . $pathToFile);
@@ -187,25 +187,18 @@ class Client
 
 
     /**
-     * @param array $options
-     */
-    public function gdcbFileSave(array $options)
-    {
-        //todo?
-    }
-
-
-    /**
      * Basic method for all api calls
      *
-     * @param        $method
      * @param string $uri
+     * @param string $method
      * @param array  $options
+     *
+     * @param string $postType
      *
      * @return mixed
      * @throws BadResponseException
      */
-    protected function callMethod($uri, $method = 'GET', $options = [])
+    protected function callMethod($uri, $method = 'GET', $options = [], $requestParamType = 'json')
     {
         $headers = [];
         if ($this->accessToken) {
@@ -215,13 +208,16 @@ class Client
         try {
             $requestKeyOptions = [
                 'GET' => 'query',
-                'POST' => 'multipart',
+                'POST' => 'json',
                 'PUT' => 'json',
             ];
+
+            $requestParamType = $requestParamType ? : $requestKeyOptions[$method];
+
             $response = $this->httpClient->request($method, $uri,
                 [
                     'headers' => $headers,
-                    $requestKeyOptions[$method] => $options
+                    $requestParamType => $options
                 ]);
             return $this->parseResponse($response);
         } catch (\Exception $e) {
