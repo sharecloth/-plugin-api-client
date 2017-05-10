@@ -185,6 +185,15 @@ class Client
         return $this->callMethod('avatar/update/' . $avatarId, 'POST', $options);
     }
 
+    /**
+     * @param $options
+     * @throws BadResponseException
+     */
+    public function cacheStatus($options)
+    {
+        $this->callMethod('cache/status', 'POST', $options);
+    }
+
 
     /**
      * Basic method for all api calls
