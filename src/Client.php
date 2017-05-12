@@ -187,11 +187,13 @@ class Client
 
     /**
      * @param $options
+     *
+     * @return mixed
      * @throws BadResponseException
      */
     public function cacheStatus($options)
     {
-        $this->callMethod('cache/status', 'POST', $options);
+        return $this->callMethod('cache/status', 'POST', $options);
     }
 
 
