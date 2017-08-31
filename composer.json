@@ -1,5 +1,5 @@
 {
-  "name": "petun/plugin-api-client",
+  "name": "sharecloth/plugin-api-client",
   "description": "Plugin API Client",
   "autoload": {
     "psr-4": {
