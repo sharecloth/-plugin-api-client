@@ -95,6 +95,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $result);
     }
 
+
+    public function testWorkerQueuePush()
+    {
+        $result = $this->client->workerQueuePush([
+            "poses" => ["v_pose"],
+            "avatars" => [1],
+            "curves" => [13],
+        ]);
+
+        $this->assertEquals(1, $result);
+    }
+
     public function testProductTextureUpload()
     {
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'fake.txt.zip';

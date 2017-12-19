@@ -78,6 +78,19 @@ class Client
         return $this->callMethod('cache/clear', 'POST', $options);
     }
 
+
+    /**
+     * API method /v1/worker-queue/push
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function workerQueuePush(array $options)
+    {
+        return $this->callMethod('worker-queue/push', 'POST', $options);
+    }
+
     /**
      * API method /v1/curve/save
      *
