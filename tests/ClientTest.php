@@ -104,7 +104,10 @@ class ClientTest extends PHPUnit_Framework_TestCase
             "curves" => [13],
         ]);
 
-        $this->assertEquals(1, $result);
+        $this->assertArrayHasKey('id', $result);
+        $this->assertArrayHasKey('count', $result);
+
+        $this->assertNotEmpty($result['id']);
     }
 
     public function testProductTextureUpload()
