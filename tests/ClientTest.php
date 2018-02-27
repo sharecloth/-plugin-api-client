@@ -53,12 +53,9 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('id', $result);
         $this->assertArrayHasKey('ident', $result);
-    }
 
 
-    public function testAvatarUpdate()
-    {
-        $result = $this->client->avatarUpdate(754, [
+        $result = $this->client->avatarUpdate($result['id'], [
             'name' => 'test male',
             'parameters' =>
                 [
@@ -93,6 +90,12 @@ class ClientTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(0, $result);
+    }
+
+    public function testProjectSync()
+    {
+        $result = $this->client->projectSync(370);
+        $this->assertInternalType('array', $result);
     }
 
 

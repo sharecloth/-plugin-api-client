@@ -80,6 +80,18 @@ class Client
 
 
     /**
+     * API method /v1/project/sync - System method for sync projects for sharecloth and plugin-web.globedrobe.com
+     *
+     * @param $id int Cloth id
+     * @return mixed
+     */
+    public function projectSync($id)
+    {
+        return $this->callMethod('project/sync/' . $id, 'POST', []);
+    }
+
+
+    /**
      * API method /v1/worker-queue/push
      *
      * @param array $options
