@@ -92,6 +92,27 @@ class Client
 
 
     /**
+     * API method /v1/cloth-metric/get
+     * @param $options
+     * @return mixed
+     */
+    public function clothMetricGet($options)
+    {
+        return $this->callMethod('cloth-metric/get', 'POST', $options);
+    }
+
+    /**
+     * API method /v1/cloth-metric/get
+     * @param $ident
+     * @return mixed
+     */
+    public function clothMetricGetByIdent($ident)
+    {
+        return $this->callMethod('cloth-metric/get-by-ident/' . $ident, 'GET');
+    }
+
+
+    /**
      * API method /v1/worker-queue/push
      *
      * @param array $options
