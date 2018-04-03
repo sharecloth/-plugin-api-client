@@ -113,6 +113,19 @@ class Client
 
 
     /**
+     * API method /v1/mesh/calc
+     *
+     *
+     * @param $options
+     * @return mixed
+     */
+    public function calcMesh($options)
+    {
+        return $this->callMethod('mesh/calc', 'POST', $options);
+    }
+
+
+    /**
      * API method /v1/worker-queue/push
      *
      * @param array $options
