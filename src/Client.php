@@ -272,7 +272,7 @@ class Client
     {
         $headers = [];
         if ($this->accessToken) {
-            $headers['Access-Token'] = $this->accessToken;
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         try {
