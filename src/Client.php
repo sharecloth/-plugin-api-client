@@ -244,6 +244,18 @@ class Client
         return $this->callMethod('avatar/update/' . $avatarId, 'POST', $options);
     }
 
+
+    /**
+     * @param $avatarId
+     * @param $options
+     * @return mixed
+     * @throws BadResponseException
+     */
+    public function avatarPose($avatarId, $options)
+    {
+        return $this->callMethod('avatar/pose/' . $avatarId, 'POST', $options);
+    }
+
     /**
      * @param $options
      *
